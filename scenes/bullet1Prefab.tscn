@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://kstxdk38bke0"]
+
+[ext_resource type="Script" uid="uid://ba7pd72m46h22" path="res://scripts/bullet1Flight.gd" id="1_bq4u0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bq4u0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huikf"]
+albedo_color = Color(0.489622, 0.489622, 0.489622, 1)
+metallic = 1.0
+rim = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_p3y1y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p3y1y"]
+
+[node name="bullet" type="CharacterBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+motion_mode = 1
+script = ExtResource("1_bq4u0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_bq4u0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_huikf")
+mesh = SubResource("SphereMesh_p3y1y")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_p3y1y")

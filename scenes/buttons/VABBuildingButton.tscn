@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckyel78f0btwv"]
+
+[ext_resource type="Script" uid="uid://4jpem8xlwjnb" path="res://scripts/buttons/buttonVAB.gd" id="1_u3wys"]
+
+[node name="ButtonN" type="Button"]
+offset_right = 252.0
+offset_bottom = 74.0
+action_mode = 0
+alignment = 2
+script = ExtResource("1_u3wys")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 62.0
+offset_bottom = 63.0
+expand_mode = 1

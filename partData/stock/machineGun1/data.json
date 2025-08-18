@@ -1,0 +1,8 @@
+{
+    "name": "Machine Gun",
+    "type": "gun",
+    "ammoType": "ammo",
+    "warpiumBoosted": true,
+    "uraniumBoosted": true,
+    "warpumUraniumBoosted": true
+}

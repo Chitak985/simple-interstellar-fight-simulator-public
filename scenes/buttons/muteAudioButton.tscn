@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dph26166qklhm"]
+
+[ext_resource type="Script" uid="uid://b5yyoc0vqec6d" path="res://scripts/buttons/buttonMainMenu.gd" id="1_3skf0"]
+
+[node name="ButtonMute" type="Button"]
+offset_left = 1015.0
+offset_top = 604.0
+offset_right = 1149.0
+offset_bottom = 645.0
+text = "Mute music"
+script = ExtResource("1_3skf0")

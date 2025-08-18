@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwsm48jcf6ch"]
+
+[ext_resource type="Script" uid="uid://dw88s13yjmgjo" path="res://scripts/vabBuilding.gd" id="1_ufwpy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnqdt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huikf"]
+albedo_color = Color(0, 0.451675, 0.116283, 1)
+metallic = 0.91
+roughness = 0.5
+rim = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_u260s"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ufwpy"]
+height = 0.50029
+radius = 1.0083
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufwpy"]
+albedo_color = Color(0.212305, 0.212305, 0.212305, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_n2nxx"]
+
+[node name="part" type="StaticBody3D"]
+script = ExtResource("1_ufwpy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_pnqdt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_huikf")
+mesh = SubResource("BoxMesh_u260s")
+
+[node name="part" type="StaticBody3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 2.5, 0, 0, 0, 0.1, 0, 0.900366, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="part"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-15, 0, -2.27374e-13, 1, 0, -0.000679016, 0)
+shape = SubResource("CylinderShape3D_ufwpy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="part"]
+material_overlay = SubResource("StandardMaterial3D_ufwpy")
+mesh = SubResource("TorusMesh_n2nxx")

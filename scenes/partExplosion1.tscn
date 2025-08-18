@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://qvncevivg806"]
+
+[ext_resource type="Script" uid="uid://b3h0u0bhnrstq" path="res://scripts/partExplosion.gd" id="1_vjmh1"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_viop0"]
+direction = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjmh1"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_vjmh1"]
+material = SubResource("StandardMaterial3D_vjmh1")
+radius = 0.2
+height = 0.4
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+emitting = false
+amount = 300
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.9
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_viop0")
+draw_pass_1 = SubResource("SphereMesh_vjmh1")
+script = ExtResource("1_vjmh1")

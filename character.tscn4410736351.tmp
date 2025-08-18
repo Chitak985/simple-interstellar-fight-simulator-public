@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://v4ac6bm2lbyf"]
+
+[ext_resource type="Script" uid="uid://b7fdspdsulbwt" path="res://characterControl.gd" id="1_glpr6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+albedo_color = Color(0.329158, 0.329158, 0.329158, 1)
+metallic = 1.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_glpr6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:intName")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(1, 3.05711e-14, -1.74846e-07, 0, 1, 1.74846e-07, 1.74846e-07, -1.74846e-07, 1, 0, 0, 0)
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+motion_mode = 1
+script = ExtResource("1_glpr6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_h2yge")
+surface_material_override/0 = SubResource("StandardMaterial3D_0xm2m")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.19564e-08, 5.96046e-08, -0.468774)
+light_energy = 10.0
+spot_range = 29.9115
+spot_angle = 44.9197
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_glpr6")

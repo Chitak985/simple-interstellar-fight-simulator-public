@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://dcwfjntdri33i"]
+
+[ext_resource type="Script" uid="uid://qro1yos3tv6g" path="res://scripts/imageLoader.gd" id="1_h1037"]
+[ext_resource type="Script" uid="uid://2y7gpcci8gph" path="res://scripts/vabSpawning.gd" id="2_5u64h"]
+[ext_resource type="Script" uid="uid://cvaxqdlhhwp6y" path="res://scripts/displayAcceleration.gd" id="3_fls3x"]
+[ext_resource type="Script" uid="uid://780ld41f88ll" path="res://scripts/resourceDisplay.gd" id="4_jbh3a"]
+[ext_resource type="Script" uid="uid://4jpem8xlwjnb" path="res://scripts/buttons/buttonVAB.gd" id="5_1ene6"]
+[ext_resource type="Script" uid="uid://b5yyoc0vqec6d" path="res://scripts/buttons/buttonMainMenu.gd" id="6_pe6di"]
+[ext_resource type="PackedScene" uid="uid://dph26166qklhm" path="res://scenes/buttons/muteAudioButton.tscn" id="7_34vh1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pnqdt"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.15
+
+[sub_resource type="Sky" id="Sky_u260s"]
+sky_material = SubResource("ProceduralSkyMaterial_pnqdt")
+
+[sub_resource type="Environment" id="Environment_7mwvb"]
+background_mode = 2
+sky = SubResource("Sky_u260s")
+tonemap_mode = 2
+
+[sub_resource type="TorusMesh" id="TorusMesh_u260s"]
+
+[node name="mainNode" type="Node3D"]
+script = ExtResource("1_h1037")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7mwvb")
+
+[node name="Camera3D" type="Camera3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.99994, 0, 0.0109953, 0, 1, 0, -0.0109953, 0, -0.99994, 0, 0, -3)
+script = ExtResource("2_5u64h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 4.67734, 1.40372, 0)
+light_energy = 1.6
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, -0.0179758, 0, 4)
+mesh = SubResource("TorusMesh_u260s")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 3.0
+offset_top = 598.0
+offset_right = 581.0
+offset_bottom = 647.0
+text = "Your current acceleration value is: "
+scroll_active = false
+script = ExtResource("3_fls3x")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 968.0
+offset_top = 1.0
+offset_right = 1149.0
+offset_bottom = 356.0
+text = "Current resources:
+None"
+scroll_active = false
+script = ExtResource("4_jbh3a")
+
+[node name="ButtonLaunch" type="Button" parent="."]
+offset_left = 389.0
+offset_top = 1.0
+offset_right = 495.0
+offset_bottom = 46.0
+text = "Launch!"
+script = ExtResource("5_1ene6")
+
+[node name="ButtonJoin" type="Button" parent="."]
+offset_left = 499.0
+offset_top = 2.0
+offset_right = 780.0
+offset_bottom = 46.0
+text = "Launch into a multiplayer server	!"
+script = ExtResource("6_pe6di")
+
+[node name="ButtonMute" parent="." instance=ExtResource("7_34vh1")]

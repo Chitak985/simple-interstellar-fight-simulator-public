@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxucecyklrsrs"]
+
+[ext_resource type="Script" uid="uid://dw88s13yjmgjo" path="res://scripts/vabBuilding.gd" id="1_ogqi1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnqdt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogqi1"]
+albedo_color = Color(1, 0.551471, 0.268048, 1)
+metallic = 0.52
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_u260s"]
+
+[node name="part" type="StaticBody3D"]
+script = ExtResource("1_ogqi1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_pnqdt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ogqi1")
+mesh = SubResource("BoxMesh_u260s")

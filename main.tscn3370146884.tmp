@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=3 uid="uid://jvu7y13yx7mm"]
+
+[ext_resource type="Script" uid="uid://bnvskcx7l4jgf" path="res://sunMovement.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://b7fdspdsulbwt" path="res://characterControl.gd" id="1_ig7tw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.15
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
+friction = 10.0
+rough = true
+bounce = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_h2yge"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.924148, -0.38142, -0.0216439, -0.036699, 0.0322409, 0.998806, -0.380266, 0.92384, -0.0437931, 0, 5.82641, 11.4493)
+light_color = Color(0.890196, 0.698039, 0, 1)
+light_energy = 4.318
+light_angular_distance = 2.49
+shadow_enabled = true
+script = ExtResource("1_0xm2m")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 3.05711e-14, -1.74846e-07, 0, 1, 1.74846e-07, 1.74846e-07, -1.74846e-07, 1, 0.010994, 0.877402, -5.62745)
+axis_lock_angular_z = true
+motion_mode = 1
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="Node3D" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Node3D"]
+transform = Transform3D(1, 6.77626e-21, -4.26326e-14, -1.01644e-20, 1, 4.26326e-14, 4.26326e-14, -4.26326e-14, 1, -0.0109939, 1.57444, 3.85899)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.19564e-08, 5.96046e-08, -0.468774)
+light_energy = 10.0
+spot_range = 29.9115
+spot_angle = 44.9197
+
+[node name="Uranium Asteroid 1" type="StaticBody3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -62.6254, -3.10815, -129.137)
+physics_material_override = SubResource("PhysicsMaterial_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Uranium Asteroid 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, 0)
+shape = SubResource("SphereShape3D_1bvp3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Uranium Asteroid 1"]
+mesh = SubResource("SphereMesh_h2yge")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Team 1 Asteroid" type="StaticBody3D" parent="."]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0.211098, -0.643483, 12.892)
+physics_material_override = SubResource("PhysicsMaterial_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Team 1 Asteroid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, 0)
+shape = SubResource("SphereShape3D_1bvp3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Team 1 Asteroid"]
+mesh = SubResource("SphereMesh_h2yge")
+skeleton = NodePath("../CollisionShape3D")

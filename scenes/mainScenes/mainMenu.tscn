@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://bfk50o1dx3ihc"]
+
+[ext_resource type="Script" uid="uid://dn887mixnr7mm" path="res://scripts/planetGen.gd" id="1_iejga"]
+[ext_resource type="Script" uid="uid://ci6l2x5rtgyet" path="res://scripts/cameraMainMenu.gd" id="2_up2ci"]
+[ext_resource type="AudioStream" uid="uid://b3y6wpu5hj0qd" path="res://music/mainMenu.wav" id="3_btg48"]
+[ext_resource type="Script" uid="uid://33rv7vbbyhqs" path="res://scripts/musicLoop.gd" id="4_fqwx1"]
+[ext_resource type="Script" uid="uid://b5yyoc0vqec6d" path="res://scripts/buttons/buttonMainMenu.gd" id="5_qvrcf"]
+[ext_resource type="PackedScene" uid="uid://dph26166qklhm" path="res://scenes/buttons/muteAudioButton.tscn" id="6_i7dhd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l1xq8"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.15
+
+[sub_resource type="Sky" id="Sky_wut1r"]
+sky_material = SubResource("ProceduralSkyMaterial_l1xq8")
+
+[sub_resource type="Environment" id="Environment_83s16"]
+background_mode = 2
+sky = SubResource("Sky_wut1r")
+tonemap_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_wked4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3jr6"]
+albedo_color = Color(1, 0.435294, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission = Color(0.972549, 0.772549, 0, 1)
+
+[node name="RootNode" type="Node3D"]
+script = ExtResource("1_iejga")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_83s16")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.870314, -0.477253, -0.121583, 0.467765, -0.878273, 0.0991569, -0.154105, 0.0294259, 0.987616, 0, 0, 0)
+light_color = Color(1, 0.690196, 0, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+h_offset = -70.0
+v_offset = 50.0
+script = ExtResource("2_up2ci")
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_btg48")
+script = ExtResource("4_fqwx1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 26.0
+offset_top = 12.0
+offset_right = 384.0
+offset_bottom = 33.0
+scale = Vector2(3.01, 3.01)
+text = "Simple Interplanetary Fight Simulator"
+scroll_active = false
+
+[node name="ButtonCreate" type="Button" parent="."]
+offset_left = 67.0
+offset_top = 324.0
+offset_right = 334.0
+offset_bottom = 375.0
+action_mode = 0
+text = "Create a multiplayer server"
+script = ExtResource("5_qvrcf")
+
+[node name="ButtonPlay" type="Button" parent="."]
+offset_left = 7.0
+offset_top = 270.0
+offset_right = 420.0
+offset_bottom = 321.0
+action_mode = 0
+text = "VAB (Launch to singleplayer or multiplayer)"
+script = ExtResource("5_qvrcf")
+
+[node name="shatteredPlanet" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -153.906)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="shatteredPlanet"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("SphereMesh_wked4")
+surface_material_override/0 = SubResource("StandardMaterial3D_c3jr6")
+
+[node name="ButtonMute" parent="." instance=ExtResource("6_i7dhd")]
