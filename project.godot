@@ -1,0 +1,33 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Simple Interplanetary Fight Simulator"
+config/tags=PackedStringArray("3d", "physics")
+run/main_scene="uid://bfk50o1dx3ihc"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+DataStorage="*res://scripts/dataStorage.gd"
+
+[dotnet]
+
+project/assembly_name="Simple Interplanetary Fight Simulator"
+
+[gui]
+
+theme/custom_font="uid://br8cd0vc7v3t8"
+
+[rendering]
+
+renderer/rendering_method.mobile="gl_compatibility"
