@@ -34,7 +34,9 @@ func start_server():
 	peer.create_server(PORT)
 	multiplayer.multiplayer_peer = peer
 
-func start_client():
+func start_client(ip):
+	if(len(ip) == 0):
+		ip = IP_ADDRESS
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(IP_ADDRESS, PORT)
+	peer.create_client(ip, PORT)
 	multiplayer.multiplayer_peer = peer

@@ -1,5 +1,7 @@
 extends Button
 
+@export var ip:LineEdit
+
 func _enter_tree():
 	if(name == "ButtonMute"):
 		if(DataStorage.muteAudio):
@@ -12,7 +14,7 @@ func _pressed():
 		get_tree().change_scene_to_file("res://scenes/mainScenes/vab.tscn")
 	elif(name == "ButtonJoin"):
 		get_tree().change_scene_to_file("res://scenes/mainScenes/main.tscn")
-		DataStorage.start_client()
+		DataStorage.start_client(ip.text)
 		DataStorage.playing = true
 	elif(name == "ButtonCreate"):
 		get_tree().change_scene_to_file("res://scenes/mainScenes/main.tscn")
